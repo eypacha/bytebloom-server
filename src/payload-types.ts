@@ -182,6 +182,15 @@ export interface Plant {
        * The reduction of the length of a new branch.
        */
       lengthReduction: number;
+      colors?:
+        | {
+            /**
+             * The color of the leaves.
+             */
+            color?: string | null;
+            id?: string | null;
+          }[]
+        | null;
     };
     leaves: {
       shape: 'circle' | 'square' | 'triangle';
@@ -193,6 +202,15 @@ export interface Plant {
        * The angle of the leaves.
        */
       angle: number;
+      colors?:
+        | {
+            /**
+             * The color of the leaves.
+             */
+            color?: string | null;
+            id?: string | null;
+          }[]
+        | null;
     };
   };
   updatedAt: string;
@@ -363,6 +381,12 @@ export interface PlantsSelect<T extends boolean = true> {
               baseLength?: T;
               maxLength?: T;
               lengthReduction?: T;
+              colors?:
+                | T
+                | {
+                    color?: T;
+                    id?: T;
+                  };
             };
         leaves?:
           | T
@@ -370,6 +394,12 @@ export interface PlantsSelect<T extends boolean = true> {
               shape?: T;
               size?: T;
               angle?: T;
+              colors?:
+                | T
+                | {
+                    color?: T;
+                    id?: T;
+                  };
             };
       };
   updatedAt?: T;

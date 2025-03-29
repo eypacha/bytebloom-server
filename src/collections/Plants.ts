@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Plants: CollectionConfig = {
   slug: 'plants',
@@ -106,7 +106,7 @@ export const Plants: CollectionConfig = {
                                     width: '33%',
                                 },
                             },
-                        ]
+                        ],
                     },                    
                     {
                         type: 'row',
@@ -151,7 +151,24 @@ export const Plants: CollectionConfig = {
                                 },
                             },
                         ]
-                    },                     
+                    },   
+                    {
+                        type: 'array',
+                        name: 'colors',
+                        label: 'Colors',
+                        minRows: 1,
+                        maxRows: 5,
+                        fields: [
+                            {
+                                type: 'text',
+                                name: 'color',
+                                label: 'Color',
+                                admin: {
+                                    description: 'The color of the leaves.',
+                                },
+                            },
+                        ]
+                    }                  
                 ]
             },
             {
@@ -167,6 +184,7 @@ export const Plants: CollectionConfig = {
                                 name: 'shape',
                                 required: true,
                                 label: 'Shape',
+                                defaultValue: 'circle',
                                 options: [
                                     {
                                         label: 'Circle',
@@ -209,7 +227,25 @@ export const Plants: CollectionConfig = {
                                 },
                             },
                         ]       
-                    }     
+                    },
+                    {
+                        type: 'array',
+                        name: 'colors',
+                        label: 'Colors',
+                        minRows: 1,
+                        maxRows: 5,
+                        fields: [
+                            {
+                                type: 'text',
+                                name: 'color',
+                                label: 'Color',
+                                admin: {
+                                    description: 'The color of the leaves.',
+                                    width: '100%',
+                                },
+                            },
+                        ]
+                    }
                 ]
             }
         ]
