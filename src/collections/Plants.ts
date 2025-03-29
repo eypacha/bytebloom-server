@@ -110,45 +110,47 @@ export const Plants: CollectionConfig = {
                     },                    
                     {
                         type: 'row',
-                        fields: [                    {
-                            type: 'number',
-                            name: 'baseLength',
-                            required: true,
-                            label: 'Base Length',
-                            min: 0,
-                            max: 100,
-                            defaultValue: 10,
-                            admin: {
-                                description: 'The length of the branch.',
-                                width: '33%',
+                        fields: [
+                            {
+                                type: 'number',
+                                name: 'baseLength',
+                                required: true,
+                                label: 'Base Length',
+                                min: 0,
+                                max: 100,
+                                defaultValue: 10,
+                                admin: {
+                                    description: 'The length of the branch.',
+                                    width: '33%',
+                                },
                             },
-                        },
-                        {
-                            type: 'number',
-                            name: 'maxLength',
-                            required: true,
-                            label: 'Max Length',
-                            min: 0,
-                            max: 100,
-                            defaultValue: 10,
-                            admin: {
-                                description: 'The max length of a new branch.',
-                                width: '33%',
+                            {
+                                type: 'number',
+                                name: 'maxLength',
+                                required: true,
+                                label: 'Max Length',
+                                min: 0,
+                                max: 100,
+                                defaultValue: 10,
+                                admin: {
+                                    description: 'The max length of a new branch.',
+                                    width: '33%',
+                                },
                             },
-                        },
-                        {
-                            type: 'number',
-                            name: 'lengthReduction',
-                            required: true,
-                            label: 'Length Reduction',
-                            min: 0,
-                            max: 1,
-                            defaultValue: .1,
-                            admin: {
-                                description: 'The reduction of the length of a new branch.',
-                                width: '33%',
+                            {
+                                type: 'number',
+                                name: 'lengthReduction',
+                                required: true,
+                                label: 'Length Reduction',
+                                min: 0,
+                                max: 1,
+                                defaultValue: .1,
+                                admin: {
+                                    description: 'The reduction of the length of a new branch.',
+                                    width: '33%',
+                                },
                             },
-                        },]
+                        ]
                     },                     
                 ]
             },
@@ -205,8 +207,8 @@ export const Plants: CollectionConfig = {
                                     description: 'The angle of the leaves.',
                                     width: '33%',
                                 },
-                            },     
-                    ]       
+                            },
+                        ]       
                     }     
                 ]
             }
