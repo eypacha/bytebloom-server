@@ -11,6 +11,9 @@ dependencies:
   '@faceless-ui/scroll-info':
     specifier: ^1.0.0
     version: 1.3.0(react-dom@19.0.0)(react@19.0.0)
+  '@modernaut/payload-color-swatch-field':
+    specifier: ^1.2.1
+    version: 1.2.1(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3)(payload@3.31.0)(react-dom@19.0.0)(react@19.0.0)(typescript@5.7.3)
   '@payloadcms/db-mongodb':
     specifier: latest
     version: 3.31.0(payload@3.31.0)
@@ -1380,6 +1383,26 @@ packages:
       react-dom: 19.0.0(react@19.0.0)
     dev: false
 
+  /@faceless-ui/scroll-info@2.0.0-beta.0(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-pUBhQP8vduA7rVndNsjhaCcds1BykA/Q4iV23JWijU6ZFL/M3Fm9P3ypDS+0VVxolqemNhw8S3FXPwZGgjH4Rw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc.0
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    dev: false
+
+  /@faceless-ui/window-info@3.0.0-beta.0(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-Qs8xRA+fl4sU2aFVe9xawxfi5TVZ9VTPuhdQpx9aSv7U5a2F0AXwT61lJfnaJ9Flm8tOcxzq67p8cVZsXNCVeQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc.0
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    dev: false
+
   /@faceless-ui/window-info@3.0.1(react-dom@19.0.0)(react@19.0.0):
     resolution: {integrity: sha512-uPjdJYE/j7hqVNelE9CRUNOeXuXDdPxR4DMe+oz3xwyZi2Y4CxsfpfdPTqqwmNAZa1P33O+ZiCyIkBEeNed0kw==}
     peerDependencies:
@@ -1412,6 +1435,19 @@ packages:
       '@floating-ui/dom': 1.6.13
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
+    dev: false
+
+  /@floating-ui/react@0.26.28(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-yORQuuAtVpiRjpMhdc0wJj06b9JFjrYF4qp96j++v2NBpbi6SEGF7donUJ3TMieerQ6qVkAv1tgr7L4r5roTqw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@floating-ui/react-dom': 2.1.2(react-dom@19.0.0)(react@19.0.0)
+      '@floating-ui/utils': 0.2.9
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      tabbable: 6.2.0
     dev: false
 
   /@floating-ui/react@0.27.5(react-dom@19.0.0)(react@19.0.0):
@@ -1874,10 +1910,42 @@ packages:
       yjs: 13.6.24
     dev: false
 
+  /@modernaut/payload-color-swatch-field@1.2.1(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3)(payload@3.31.0)(react-dom@19.0.0)(react@19.0.0)(typescript@5.7.3):
+    resolution: {integrity: sha512-snBk3OK0UWxoTj1W1lmcAlmMgqaXEe9H9Y4J+FdyT/YerFvAMz0AprKEPmkfzb8zC4oHlHpnxA/rYPo5Z67iTQ==}
+    peerDependencies:
+      payload: v3.0.0-beta.117
+      react: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+      react-dom: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+    dependencies:
+      '@payloadcms/ui': 3.0.0-beta.117(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3)(payload@3.31.0)(react-dom@19.0.0)(react@19.0.0)(typescript@5.7.3)
+      payload: 3.31.0(graphql@16.10.0)(typescript@5.7.3)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - monaco-editor
+      - next
+      - supports-color
+      - typescript
+    dev: false
+
   /@monaco-editor/loader@1.5.0:
     resolution: {integrity: sha512-hKoGSM+7aAc7eRTRjpqAZucPmoNOC4UUbknb/VNoTkEIkCPhqV8LfbsgM1webRM7S/z21eHEx9Fkwx8Z/C/+Xw==}
     dependencies:
       state-local: 1.0.7
+    dev: false
+
+  /@monaco-editor/react@4.6.0(monaco-editor@0.52.2)(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==}
+    peerDependencies:
+      monaco-editor: '>= 0.25.0 < 1'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@monaco-editor/loader': 1.5.0
+      monaco-editor: 0.52.2
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
     dev: false
 
   /@monaco-editor/react@4.7.0(monaco-editor@0.52.2)(react-dom@19.0.0)(react@19.0.0):
@@ -2174,10 +2242,59 @@ packages:
       - yjs
     dev: false
 
+  /@payloadcms/translations@3.0.0-beta.117:
+    resolution: {integrity: sha512-UU+Mjt2aKVnPIpp1iZ9QQRE94HygJPv85eBhW93W4zThczvBvdR5vQ7da+8NBZWAcNw97/C5hKir9m8FmvWIhQ==}
+    dependencies:
+      date-fns: 3.3.1
+    dev: false
+
   /@payloadcms/translations@3.31.0:
     resolution: {integrity: sha512-vjbBuHJUZ04R7wkOR1+QhZRO1xG7bvkLgx6zoiKZZmvItqiPA5ZWsyrq3NFhviOH26dH2tOdnO+RLPuaElkWFg==}
     dependencies:
       date-fns: 4.1.0
+    dev: false
+
+  /@payloadcms/ui@3.0.0-beta.117(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3)(payload@3.31.0)(react-dom@19.0.0)(react@19.0.0)(typescript@5.7.3):
+    resolution: {integrity: sha512-XTOaHEAu0qwttqwl8nQ5j/faDiNfzVLHCQGIkv0J/1IKo78LbS2sO7ptS24bOpP8Um7yocYmqWoJNHw/v65wvA==}
+    engines: {node: ^18.20.2 || >=20.9.0}
+    peerDependencies:
+      next: ^15.0.0
+      payload: 3.0.0-beta.117
+      react: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+      react-dom: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+    dependencies:
+      '@dnd-kit/core': 6.0.8(react-dom@19.0.0)(react@19.0.0)
+      '@dnd-kit/sortable': 7.0.2(@dnd-kit/core@6.0.8)(react@19.0.0)
+      '@faceless-ui/modal': 3.0.0-beta.2(react-dom@19.0.0)(react@19.0.0)
+      '@faceless-ui/scroll-info': 2.0.0-beta.0(react-dom@19.0.0)(react@19.0.0)
+      '@faceless-ui/window-info': 3.0.0-beta.0(react-dom@19.0.0)(react@19.0.0)
+      '@monaco-editor/react': 4.6.0(monaco-editor@0.52.2)(react-dom@19.0.0)(react@19.0.0)
+      '@payloadcms/translations': 3.0.0-beta.117
+      body-scroll-lock: 4.0.0-beta.0
+      bson-objectid: 2.0.4
+      date-fns: 3.3.1
+      dequal: 2.0.3
+      md5: 2.3.0
+      next: 15.2.3(react-dom@19.0.0)(react@19.0.0)
+      object-to-formdata: 4.5.1
+      payload: 3.31.0(graphql@16.10.0)(typescript@5.7.3)
+      qs-esm: 7.0.2
+      react: 19.0.0
+      react-animate-height: 2.1.2(react-dom@19.0.0)(react@19.0.0)
+      react-datepicker: 6.9.0(react-dom@19.0.0)(react@19.0.0)
+      react-dom: 19.0.0(react@19.0.0)
+      react-image-crop: 10.1.8(react@19.0.0)
+      react-select: 5.8.0(@types/react@19.0.12)(react-dom@19.0.0)(react@19.0.0)
+      scheduler: 0.0.0-experimental-3edc000d-20240926
+      sonner: 1.7.4(react-dom@19.0.0)(react@19.0.0)
+      ts-essentials: 10.0.2(typescript@5.7.3)
+      use-context-selector: 2.0.0(react@19.0.0)(scheduler@0.0.0-experimental-3edc000d-20240926)
+      uuid: 10.0.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - monaco-editor
+      - supports-color
+      - typescript
     dev: false
 
   /@payloadcms/ui@3.31.0(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3)(payload@3.31.0)(react-dom@19.0.0)(react@19.0.0)(typescript@5.7.3):
@@ -3659,6 +3776,10 @@ packages:
 
   /dataloader@2.2.3:
     resolution: {integrity: sha512-y2krtASINtPFS1rSDjacrFgn1dcUuoREVabwlOGOe4SdxenREqwjwjElAdwvbGM7kgZz9a3KVicWR7vcz8rnzA==}
+    dev: false
+
+  /date-fns@3.3.1:
+    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
     dev: false
 
   /date-fns@3.6.0:
@@ -5989,6 +6110,34 @@ packages:
       strip-json-comments: 2.0.1
     dev: false
 
+  /react-animate-height@2.1.2(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-A9jfz/4CTdsIsE7WCQtO9UkOpMBcBRh8LxyHl2eoZz1ki02jpyUL5xt58gabd0CyeLQ8fRyQ+s2lyV2Ufu8Owg==}
+    engines: {node: '>= 6.0.0'}
+    peerDependencies:
+      react: '>=15.6.2'
+      react-dom: '>=15.6.2'
+    dependencies:
+      classnames: 2.5.1
+      prop-types: 15.8.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    dev: false
+
+  /react-datepicker@6.9.0(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-QTxuzeem7BUfVFWv+g5WuvzT0c5BPo+XTCNbMTZKSZQLU+cMMwSUHwspaxuIcDlwNcOH0tiJ+bh1fJ2yxOGYWA==}
+    peerDependencies:
+      react: ^16.9.0 || ^17 || ^18
+      react-dom: ^16.9.0 || ^17 || ^18
+    dependencies:
+      '@floating-ui/react': 0.26.28(react-dom@19.0.0)(react@19.0.0)
+      clsx: 2.1.1
+      date-fns: 3.6.0
+      prop-types: 15.8.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      react-onclickoutside: 6.13.1(react-dom@19.0.0)(react@19.0.0)
+    dev: false
+
   /react-datepicker@7.6.0(react-dom@19.0.0)(react@19.0.0):
     resolution: {integrity: sha512-9cQH6Z/qa4LrGhzdc3XoHbhrxNcMi9MKjZmYgF/1MNNaJwvdSjv3Xd+jjvrEEbKEf71ZgCA3n7fQbdwd70qCRw==}
     peerDependencies:
@@ -6059,6 +6208,38 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-onclickoutside@6.13.1(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-LdrrxK/Yh9zbBQdFbMTXPp3dTSN9B+9YJQucdDu3JNKRrbdU+H+/TVONJoWtOwy4II8Sqf1y/DTI6w/vGPYW0w==}
+    peerDependencies:
+      react: ^15.5.x || ^16.x || ^17.x || ^18.x
+      react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    dev: false
+
+  /react-select@5.8.0(@types/react@19.0.12)(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-TfjLDo58XrhP6VG5M/Mi56Us0Yt8X7xD6cDybC7yoRMUNm7BGO7qk8J0TLQOua/prb8vUOtsfnXZwfm30HGsAA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.27.0
+      '@emotion/cache': 11.14.0
+      '@emotion/react': 11.14.0(@types/react@19.0.12)(react@19.0.0)
+      '@floating-ui/dom': 1.6.13
+      '@types/react-transition-group': 4.4.12(@types/react@19.0.12)
+      memoize-one: 6.0.0
+      prop-types: 15.8.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      react-transition-group: 4.4.5(react-dom@19.0.0)(react@19.0.0)
+      use-isomorphic-layout-effect: 1.2.0(@types/react@19.0.12)(react@19.0.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+    dev: false
 
   /react-select@5.9.0(@types/react@19.0.12)(react-dom@19.0.0)(react@19.0.0):
     resolution: {integrity: sha512-nwRKGanVHGjdccsnzhFte/PULziueZxGD8LL2WojON78Mvnq7LdAMEtu2frrwld1fr3geixg3iiMBIc/LLAZpw==}
@@ -6244,6 +6425,10 @@ packages:
       chokidar: 3.6.0
       immutable: 4.3.7
       source-map-js: 1.2.1
+    dev: false
+
+  /scheduler@0.0.0-experimental-3edc000d-20240926:
+    resolution: {integrity: sha512-360BMNajOhMyrirau0pzWVgeakvrfjbfdqHnX2K+tSGTmn6tBN+6K5NhhaebqeXXWyCU3rl5FApjgF2GN0W5JA==}
     dev: false
 
   /scheduler@0.25.0:
@@ -6734,6 +6919,17 @@ packages:
       typescript: 5.7.3
     dev: true
 
+  /ts-essentials@10.0.2(typescript@5.7.3):
+    resolution: {integrity: sha512-Xwag0TULqriaugXqVdDiGZ5wuZpqABZlpwQ2Ho4GDyiu/R2Xjkp/9+zcFxL7uzeLl/QCPrflnvpVYyS3ouT7Zw==}
+    peerDependencies:
+      typescript: '>=4.5.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 5.7.3
+    dev: false
+
   /ts-essentials@10.0.3(typescript@5.7.3):
     resolution: {integrity: sha512-/FrVAZ76JLTWxJOERk04fm8hYENDo0PWSP3YLQKxevLwWtxemGcl5JJEzN4iqfDlRve0ckyfFaOBu4xbNH/wZw==}
     peerDependencies:
@@ -6915,6 +7111,16 @@ packages:
     dependencies:
       punycode: 2.3.1
     dev: true
+
+  /use-context-selector@2.0.0(react@19.0.0)(scheduler@0.0.0-experimental-3edc000d-20240926):
+    resolution: {integrity: sha512-owfuSmUNd3eNp3J9CdDl0kMgfidV+MkDvHPpvthN5ThqM+ibMccNE0k+Iq7TWC6JPFvGZqanqiGCuQx6DyV24g==}
+    peerDependencies:
+      react: '>=18.0.0'
+      scheduler: '>=0.19.0'
+    dependencies:
+      react: 19.0.0
+      scheduler: 0.0.0-experimental-3edc000d-20240926
+    dev: false
 
   /use-context-selector@2.0.0(react@19.0.0)(scheduler@0.25.0):
     resolution: {integrity: sha512-owfuSmUNd3eNp3J9CdDl0kMgfidV+MkDvHPpvthN5ThqM+ibMccNE0k+Iq7TWC6JPFvGZqanqiGCuQx6DyV24g==}

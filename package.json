@@ -17,6 +17,7 @@
   "dependencies": {
     "@faceless-ui/modal": "^2.0.0",
     "@faceless-ui/scroll-info": "^1.0.0",
+    "@modernaut/payload-color-swatch-field": "^1.2.1",
     "@payloadcms/db-mongodb": "latest",
     "@payloadcms/next": "latest",
     "@payloadcms/payload-cloud": "latest",
