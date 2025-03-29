@@ -4,6 +4,7 @@ export const LSystems: CollectionConfig = {
   slug: 'lsystems',
   admin: {
     useAsTitle: 'name',
+    group: 'Main',
   },
   auth: false,
   fields: [
