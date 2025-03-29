@@ -2,9 +2,14 @@ import type { CollectionConfig } from 'payload'
 
 export const LSystems: CollectionConfig = {
   slug: 'lsystems',
+  labels: {
+    singular: 'L-System',
+    plural: 'L-Systems',
+ },
   admin: {
     useAsTitle: 'name',
     group: 'Main',
+    
   },
   auth: false,
   fields: [
@@ -76,7 +81,6 @@ export const LSystems: CollectionConfig = {
                 ]
             }
         ]
-    }
-    
+    },
   ],
 }

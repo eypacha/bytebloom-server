@@ -68,8 +68,9 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    media: Media;
+    plants: Plant;
     lsystems: Lsystem;
+    images: Image;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,8 +78,9 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
+    plants: PlantsSelect<false> | PlantsSelect<true>;
     lsystems: LsystemsSelect<false> | LsystemsSelect<true>;
+    images: ImagesSelect<false> | ImagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -134,22 +136,56 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "plants".
  */
-export interface Media {
+export interface Plant {
   id: string;
-  alt: string;
+  /**
+   * The name of the L-System.
+   */
+  name: string;
+  /**
+   * The L-System associated with this plant.
+   */
+  lSystem: string | Lsystem;
+  /**
+   * Preview image of the plant.
+   */
+  previewImage: string | Image;
+  params: {
+    /**
+     * The number of max iterations to perform.
+     */
+    maxIterations: number;
+    Branchs: {
+      /**
+       * The angle of a new branch.
+       */
+      angle: number;
+      /**
+       * The width of the branch.
+       */
+      baseWidth: number;
+      /**
+       * The cutoff width of the branch.
+       */
+      widthCutoff: number;
+      /**
+       * The length of the branch.
+       */
+      baseLength: number;
+      /**
+       * The max length of a new branch.
+       */
+      maxLength: number;
+      /**
+       * The reduction of the length of a new branch.
+       */
+      lengthReduction: number;
+    };
+  };
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -188,6 +224,35 @@ export interface Lsystem {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "images".
+ */
+export interface Image {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -198,12 +263,16 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
-        relationTo: 'media';
-        value: string | Media;
+        relationTo: 'plants';
+        value: string | Plant;
       } | null)
     | ({
         relationTo: 'lsystems';
         value: string | Lsystem;
+      } | null)
+    | ({
+        relationTo: 'images';
+        value: string | Image;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -264,21 +333,29 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "plants_select".
  */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
+export interface PlantsSelect<T extends boolean = true> {
+  name?: T;
+  lSystem?: T;
+  previewImage?: T;
+  params?:
+    | T
+    | {
+        maxIterations?: T;
+        Branchs?:
+          | T
+          | {
+              angle?: T;
+              baseWidth?: T;
+              widthCutoff?: T;
+              baseLength?: T;
+              maxLength?: T;
+              lengthReduction?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -297,6 +374,38 @@ export interface LsystemsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "images_select".
+ */
+export interface ImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
