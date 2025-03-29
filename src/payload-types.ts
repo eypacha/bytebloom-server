@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    lsystems: Lsystem;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +78,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    lsystems: LsystemsSelect<false> | LsystemsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -151,6 +153,41 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lsystems".
+ */
+export interface Lsystem {
+  id: string;
+  /**
+   * The name of the L-System.
+   */
+  name: string;
+  /**
+   * The initial string of the L-System.
+   */
+  axiom: string;
+  /**
+   * The production rules of the L-System.
+   */
+  rules: {
+    /**
+     * The predecessor string.
+     */
+    predecessor: string;
+    /**
+     * The successor string.
+     */
+    successor?: string | null;
+    /**
+     * The odds of this rule being applied.
+     */
+    odds: number;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -163,6 +200,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'lsystems';
+        value: string | Lsystem;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,6 +279,24 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lsystems_select".
+ */
+export interface LsystemsSelect<T extends boolean = true> {
+  name?: T;
+  axiom?: T;
+  rules?:
+    | T
+    | {
+        predecessor?: T;
+        successor?: T;
+        odds?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
