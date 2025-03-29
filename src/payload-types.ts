@@ -183,6 +183,17 @@ export interface Plant {
        */
       lengthReduction: number;
     };
+    leaves: {
+      shape: 'circle' | 'square' | 'triangle';
+      /**
+       * The size of the leaves.
+       */
+      size: number;
+      /**
+       * The angle of the leaves.
+       */
+      angle: number;
+    };
   };
   updatedAt: string;
   createdAt: string;
@@ -352,6 +363,13 @@ export interface PlantsSelect<T extends boolean = true> {
               baseLength?: T;
               maxLength?: T;
               lengthReduction?: T;
+            };
+        leaves?:
+          | T
+          | {
+              shape?: T;
+              size?: T;
+              angle?: T;
             };
       };
   updatedAt?: T;

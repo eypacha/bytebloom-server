@@ -151,6 +151,64 @@ export const Plants: CollectionConfig = {
                         },]
                     },                     
                 ]
+            },
+            {
+                type: 'group',
+                name: 'leaves',
+                label: 'Leaves',
+                fields: [
+                    {
+                        type: 'row',
+                        fields: [
+                            {
+                                type: 'select',
+                                name: 'shape',
+                                required: true,
+                                label: 'Shape',
+                                options: [
+                                    {
+                                        label: 'Circle',
+                                        value: 'circle',
+                                    },
+                                    {
+                                        label: 'Square',
+                                        value: 'square',
+                                    },
+                                    {
+                                        label: 'Triangle',
+                                        value: 'triangle',
+                                    },
+                                ],
+                            },
+                            {
+                                type: 'number',
+                                name: 'size',
+                                required: true,
+                                label: 'Size',
+                                min: 0,
+                                max: 100,
+                                defaultValue: 10,
+                                admin: {
+                                    description: 'The size of the leaves.',
+                                    width: '33%',
+                                },
+                            },
+                            {
+                                type: 'number',
+                                name: 'angle',
+                                required: true,
+                                label: 'Angle',
+                                min: 0,
+                                max: 360,
+                                defaultValue: 25,
+                                admin: {
+                                    description: 'The angle of the leaves.',
+                                    width: '33%',
+                                },
+                            },     
+                    ]       
+                    }     
+                ]
             }
         ]
     }
