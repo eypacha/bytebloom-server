@@ -11,7 +11,9 @@ export const LSystems: CollectionConfig = {
     group: 'Main',
     
   },
-  auth: false,
+  access: {
+    read: () => { return true },
+  },
   fields: [
     {
         type: 'row',

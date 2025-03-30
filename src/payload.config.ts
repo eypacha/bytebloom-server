@@ -17,7 +17,10 @@ import { Images } from './collections/Images'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default buildConfig({
+  cors: isProduction ? [] : "*",
   admin: {
     user: Users.slug,
     importMap: {

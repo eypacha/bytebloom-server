@@ -141,9 +141,13 @@ export interface User {
 export interface Plant {
   id: string;
   /**
-   * The name of the L-System.
+   * The name of the plant.
    */
   name: string;
+  /**
+   * Short description of the plant.
+   */
+  description?: string | null;
   /**
    * The L-System associated with this plant.
    */
@@ -151,68 +155,79 @@ export interface Plant {
   /**
    * Preview image of the plant.
    */
-  previewImage: string | Image;
-  params: {
-    /**
-     * The number of max iterations to perform.
-     */
-    maxIterations: number;
-    Branchs: {
-      /**
-       * The angle of a new branch.
-       */
-      angle: number;
-      /**
-       * The width of the branch.
-       */
-      baseWidth: number;
-      /**
-       * The cutoff width of the branch.
-       */
-      widthCutoff: number;
-      /**
-       * The length of the branch.
-       */
-      baseLength: number;
-      /**
-       * The max length of a new branch.
-       */
-      maxLength: number;
-      /**
-       * The reduction of the length of a new branch.
-       */
-      lengthReduction: number;
-      colors?:
-        | {
-            /**
-             * The color of the leaves.
-             */
-            color?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
-    leaves: {
-      shape: 'circle' | 'square' | 'triangle';
-      /**
-       * The size of the leaves.
-       */
-      size: number;
-      /**
-       * The angle of the leaves.
-       */
-      angle: number;
-      colors?:
-        | {
-            /**
-             * The color of the leaves.
-             */
-            color?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
-  };
+  previewImage?: (string | null) | Image;
+  varieties?:
+    | {
+        /**
+         * The name of the variety.
+         */
+        name: string;
+        /**
+         * Preview image of the variety.
+         */
+        previewImage?: (string | null) | Image;
+        /**
+         * The number of max iterations to perform.
+         */
+        maxIterations: number;
+        Branchs: {
+          /**
+           * The angle of a new branch.
+           */
+          angle: number;
+          /**
+           * The width of the branch.
+           */
+          baseWidth: number;
+          /**
+           * The cutoff width of the branch.
+           */
+          widthCutoff: number;
+          /**
+           * The length of the branch.
+           */
+          baseLength: number;
+          /**
+           * The max length of a new branch.
+           */
+          maxLength: number;
+          /**
+           * The reduction of the length of a new branch.
+           */
+          lengthReduction: number;
+          colors?:
+            | {
+                /**
+                 * The color of the branchs.
+                 */
+                color: string;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        leaves: {
+          shape: 'circle' | 'square' | 'triangle';
+          /**
+           * The size of the leaves.
+           */
+          size: number;
+          /**
+           * The angle of the leaves.
+           */
+          angle: number;
+          colors?:
+            | {
+                /**
+                 * The color of the leaves.
+                 */
+                color: string;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -366,11 +381,14 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface PlantsSelect<T extends boolean = true> {
   name?: T;
+  description?: T;
   lSystem?: T;
   previewImage?: T;
-  params?:
+  varieties?:
     | T
     | {
+        name?: T;
+        previewImage?: T;
         maxIterations?: T;
         Branchs?:
           | T
@@ -401,6 +419,7 @@ export interface PlantsSelect<T extends boolean = true> {
                     id?: T;
                   };
             };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -5,6 +5,9 @@ export const Images: CollectionConfig = {
   admin: {
     group: 'Media',
   },
+  access: {
+    read: () => { return true },
+  },
   upload: {
     staticDir: 'images',
     imageSizes: [
