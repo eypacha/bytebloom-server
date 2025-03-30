@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    'user-plants': UserPlant;
     plants: Plant;
     lsystems: Lsystem;
     images: Image;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    'user-plants': UserPlantsSelect<false> | UserPlantsSelect<true>;
     plants: PlantsSelect<false> | PlantsSelect<true>;
     lsystems: LsystemsSelect<false> | LsystemsSelect<true>;
     images: ImagesSelect<false> | ImagesSelect<true>;
@@ -133,6 +135,27 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-plants".
+ */
+export interface UserPlant {
+  id: string;
+  /**
+   * User who owns the plant.
+   */
+  user: string | User;
+  /**
+   * Plant associated with the user.
+   */
+  plant: string | Plant;
+  /**
+   * Index of the plant variety.
+   */
+  variety: number;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -307,6 +330,10 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
+        relationTo: 'user-plants';
+        value: string | UserPlant;
+      } | null)
+    | ({
         relationTo: 'plants';
         value: string | Plant;
       } | null)
@@ -374,6 +401,17 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-plants_select".
+ */
+export interface UserPlantsSelect<T extends boolean = true> {
+  user?: T;
+  plant?: T;
+  variety?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
