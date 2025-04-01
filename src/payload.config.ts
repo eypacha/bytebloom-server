@@ -27,6 +27,18 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      title: 'Admin panel',
+      titleSuffix: '🌱 Bytebloom',
+      description: 'Backend for Bytebloom',
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          url: '/favicon.png',
+        },
+      ],
+    },
   },
   collections: [Users, UserPlants, Plants, LSystems, Images],
   editor: lexicalEditor(),
