@@ -27,6 +27,12 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: '/components/logo',
+        Icon: '/components/icon',
+      },
+    },
     meta: {
       title: 'Admin panel',
       titleSuffix: '🌱 Bytebloom',
