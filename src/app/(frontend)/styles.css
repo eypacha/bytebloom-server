@@ -9,7 +9,7 @@
 html {
   font-size: 18px;
   line-height: 32px;
-
+  
   background: rgb(0, 0, 0);
   -webkit-font-smoothing: antialiased;
 }
@@ -21,7 +21,7 @@ body,
 }
 
 body {
-  font-family: system-ui;
+  font-family: var(--font-mono);
   font-size: 18px;
   line-height: 32px;
 
@@ -34,15 +34,16 @@ body {
   }
 }
 
-img {
-  max-width: 100%;
+svg {
+  max-width: 200px;
   height: auto;
+  aspect-ratio: 1;
   display: block;
 }
 
 h1 {
   margin: 40px 0;
-  font-size: 64px;
+  font-size: 40px;
   line-height: 70px;
   font-weight: bold;
 
