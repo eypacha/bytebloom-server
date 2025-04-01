@@ -104,7 +104,7 @@ export const Plants: CollectionConfig = {
         },
         {
           type: 'group',
-          name: 'Branchs',
+          name: 'branchs',
           label: 'Branchs',
           fields: [
             {
@@ -129,8 +129,8 @@ export const Plants: CollectionConfig = {
                   required: true,
                   label: 'Base width',
                   min: 0,
-                  max: 100,
-                  defaultValue: 10,
+                  max: 20,
+                  defaultValue: 1,
                   admin: {
                     description: 'The width of the branch.',
                     width: '33%',
@@ -138,14 +138,14 @@ export const Plants: CollectionConfig = {
                 },
                 {
                   type: 'number',
-                  name: 'widthCutoff',
+                  name: 'widthFalloff',
                   required: true,
-                  label: 'Width Cutoff',
+                  label: 'Width Falloff',
                   min: 0,
                   max: 100,
                   defaultValue: 10,
                   admin: {
-                    description: 'The cutoff width of the branch.',
+                    description: 'The falloff width of the branch.',
                     width: '33%',
                   },
                 },
@@ -187,7 +187,7 @@ export const Plants: CollectionConfig = {
                   label: 'Length Reduction',
                   min: 0,
                   max: 1,
-                  defaultValue: 0.1,
+                  defaultValue: 0.9,
                   admin: {
                     description: 'The reduction of the length of a new branch.',
                     width: '33%',

@@ -151,9 +151,82 @@ export interface UserPlant {
    */
   plant: string | Plant;
   /**
-   * Index of the plant variety.
+   * The number of iterations to perform.
    */
-  variety: number;
+  iterations: number;
+  /**
+   * The string of the L-System.
+   */
+  lSystemString: string;
+  params: {
+    /**
+     * The name of the variety.
+     */
+    name: string;
+    /**
+     * Preview image of the variety.
+     */
+    previewImage?: (string | null) | Image;
+    /**
+     * The number of max iterations to perform.
+     */
+    maxIterations: number;
+    branchs: {
+      /**
+       * The angle of a new branch.
+       */
+      angle: number;
+      /**
+       * The width of the branch.
+       */
+      baseWidth: number;
+      /**
+       * The fallof width of the branch.
+       */
+      widthFalloff: number;
+      /**
+       * The length of the branch.
+       */
+      baseLength: number;
+      /**
+       * The max length of a new branch.
+       */
+      maxLength: number;
+      /**
+       * The reduction of the length of a new branch.
+       */
+      lengthReduction: number;
+      colors?:
+        | {
+            /**
+             * The color of the branchs.
+             */
+            color: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    leaves: {
+      shape: 'circle' | 'square' | 'triangle';
+      /**
+       * The size of the leaves.
+       */
+      size: number;
+      /**
+       * The angle of the leaves.
+       */
+      angle: number;
+      colors?:
+        | {
+            /**
+             * The color of the leaves.
+             */
+            color: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -193,7 +266,7 @@ export interface Plant {
          * The number of max iterations to perform.
          */
         maxIterations: number;
-        Branchs: {
+        branchs: {
           /**
            * The angle of a new branch.
            */
@@ -203,9 +276,9 @@ export interface Plant {
            */
           baseWidth: number;
           /**
-           * The cutoff width of the branch.
+           * The falloff width of the branch.
            */
-          widthCutoff: number;
+          widthFalloff: number;
           /**
            * The length of the branch.
            */
@@ -409,7 +482,44 @@ export interface UsersSelect<T extends boolean = true> {
 export interface UserPlantsSelect<T extends boolean = true> {
   user?: T;
   plant?: T;
-  variety?: T;
+  iterations?: T;
+  lSystemString?: T;
+  params?:
+    | T
+    | {
+        name?: T;
+        previewImage?: T;
+        maxIterations?: T;
+        branchs?:
+          | T
+          | {
+              angle?: T;
+              baseWidth?: T;
+              widthFalloff?: T;
+              baseLength?: T;
+              maxLength?: T;
+              lengthReduction?: T;
+              colors?:
+                | T
+                | {
+                    color?: T;
+                    id?: T;
+                  };
+            };
+        leaves?:
+          | T
+          | {
+              shape?: T;
+              size?: T;
+              angle?: T;
+              colors?:
+                | T
+                | {
+                    color?: T;
+                    id?: T;
+                  };
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -428,12 +538,12 @@ export interface PlantsSelect<T extends boolean = true> {
         name?: T;
         previewImage?: T;
         maxIterations?: T;
-        Branchs?:
+        branchs?:
           | T
           | {
               angle?: T;
               baseWidth?: T;
-              widthCutoff?: T;
+              widthFalloff?: T;
               baseLength?: T;
               maxLength?: T;
               lengthReduction?: T;
