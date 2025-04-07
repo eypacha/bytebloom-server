@@ -39,7 +39,7 @@ dependencies:
     specifier: 15.2.3
     version: 15.2.3(react-dom@19.0.0)(react@19.0.0)
   payload:
-    specifier: latest
+    specifier: 3.31.0
     version: 3.31.0(graphql@16.10.0)(typescript@5.7.3)
   react:
     specifier: 19.0.0
@@ -4602,7 +4602,6 @@ packages:
     resolution: {integrity: sha512-kGzZ3LWWQcGIAmg6iWvXn0ei6WDtV26wzHRMwDSzmAbcXrTEXxHy6IehI6/4eT6VRKyMP1eF1VqwrVUmE/LR7A==}
     dependencies:
       resolve-pkg-maps: 1.0.0
-    dev: true
 
   /get-tsconfig@4.8.1:
     resolution: {integrity: sha512-k9PN+cFBmaLWtVz29SkUoqU5O0slLuHJXt/2P+tMVFT+phsSGXGkp9t3rQIqdz0e+06EHNGs3oM6ZX1s2zHxRg==}
@@ -6963,7 +6962,7 @@ packages:
     hasBin: true
     dependencies:
       esbuild: 0.23.1
-      get-tsconfig: 4.8.1
+      get-tsconfig: 4.10.0
     optionalDependencies:
       fsevents: 2.3.3
     dev: false
