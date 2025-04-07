@@ -23,16 +23,17 @@ export const Plants: CollectionConfig = {
           label: 'Name',
           admin: {
             description: 'The name of the plant.',
-            width: '50%',
+            width: '25%',
           },
         },
+
         {
           type: 'text',
           name: 'description',
           label: 'Description',
           admin: {
             description: 'Short description of the plant.',
-            width: '50%',
+            width: '75%',
           },
         },
         {
@@ -60,33 +61,47 @@ export const Plants: CollectionConfig = {
       ],
     },
     {
-      type: 'array',
-      name: 'varieties',
-      label: 'Varieties',
+      type: 'row',
+      fields: [
+        {
+          type: 'checkbox',
+          name: 'isTrailing',
+          label: 'Trailing plant',
+          admin: {
+            description: 'Is this plant a trailing plant?',
+            width: '25%',
+          },
+        },
+        {
+          type: 'checkbox',
+          name: 'hasLeaves',
+          label: 'Has leaves',
+          defaultValue: true,
+          admin: {
+            description: 'Does this plant have leaves?',
+            width: '25%',
+          },
+        },
+        {
+          type: 'checkbox',
+          name: 'isDeciduous',
+          label: 'Deciduous plant',
+          defaultValue: false,
+          admin: {
+            description: 'Is this plant deciduous?',
+            width: '25%',
+          },
+        },
+      ],
+    },
+    {
+      type: 'group',
+      name: 'params',
+      label: 'Parameters',
       fields: [
         {
           type: 'row',
           fields: [
-            {
-              type: 'text',
-              name: 'name',
-              label: 'Name',
-              required: true,
-              admin: {
-                description: 'The name of the variety.',
-                width: '33%',
-              },
-            },
-            {
-              type: 'relationship',
-              name: 'previewImage',
-              label: 'Preview Image',
-              relationTo: 'images',
-              admin: {
-                description: 'Preview image of the variety.',
-                width: '33%',
-              },
-            },
             {
               type: 'number',
               name: 'maxIterations',
@@ -97,7 +112,6 @@ export const Plants: CollectionConfig = {
               defaultValue: 7,
               admin: {
                 description: 'The number of max iterations to perform.',
-                width: '34%',
               },
             },
           ],
@@ -114,13 +128,26 @@ export const Plants: CollectionConfig = {
                   type: 'number',
                   name: 'angle',
                   required: true,
-                  label: 'Angle',
+                  label: 'BaseAngle',
                   min: 0,
                   max: 360,
                   defaultValue: 25,
                   admin: {
                     description: 'The angle of a new branch.',
-                    width: '33%',
+                    width: '25%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'angleReduction',
+                  required: true,
+                  label: 'Angle Reduction',
+                  min: 0,
+                  max: 1,
+                  defaultValue: 1,
+                  admin: {
+                    description: 'The reduction of the angle of a new branch.',
+                    width: '25%',
                   },
                 },
                 {
@@ -133,20 +160,20 @@ export const Plants: CollectionConfig = {
                   defaultValue: 1,
                   admin: {
                     description: 'The width of the branch.',
-                    width: '33%',
+                    width: '25%',
                   },
                 },
                 {
                   type: 'number',
-                  name: 'widthFalloff',
+                  name: 'widthReduction',
                   required: true,
-                  label: 'Width Falloff',
+                  label: 'Width Reduction',
                   min: 0,
                   max: 100,
-                  defaultValue: 10,
+                  defaultValue: 0,
                   admin: {
-                    description: 'The falloff width of the branch.',
-                    width: '33%',
+                    description: 'The with reduction width of the branch.',
+                    width: '25%',
                   },
                 },
               ],
@@ -164,7 +191,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 10,
                   admin: {
                     description: 'The length of the branch.',
-                    width: '33%',
+                    width: '25%',
                   },
                 },
                 {
@@ -177,7 +204,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 10,
                   admin: {
                     description: 'The max length of a new branch.',
-                    width: '33%',
+                    width: '25%',
                   },
                 },
                 {
@@ -190,26 +217,20 @@ export const Plants: CollectionConfig = {
                   defaultValue: 0.9,
                   admin: {
                     description: 'The reduction of the length of a new branch.',
-                    width: '33%',
+                    width: '25%',
                   },
                 },
-              ],
-            },
-            {
-              type: 'array',
-              name: 'colors',
-              label: 'Colors',
-              minRows: 1,
-              maxRows: 5,
-              fields: [
                 {
-                  type: 'text',
-                  name: 'color',
-                  label: 'Color',
-                  defaultValue: '#2d140b',
+                  type: 'number',
+                  name: 'randomness',
                   required: true,
+                  label: 'Randomnes',
+                  min: 0,
+                  max: 1,
+                  defaultValue: 0.5,
                   admin: {
-                    description: 'The color of the branchs.',
+                    description: 'The randomness of the three.',
+                    width: '25%',
                   },
                 },
               ],
@@ -225,70 +246,51 @@ export const Plants: CollectionConfig = {
               type: 'row',
               fields: [
                 {
+                  type: 'number',
+                  name: 'sizeX',
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  defaultValue: 4,
+                  admin: {
+                    description: 'The width of the leaves.',
+                    width: '33%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'sizeY',
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  defaultValue: 4,
+                  admin: {
+                    description: 'The height of the leaves.',
+                    width: '33%',
+                  },
+                },
+                {
                   type: 'select',
                   name: 'shape',
                   required: true,
-                  label: 'Shape',
-                  defaultValue: 'circle',
                   options: [
-                    {
-                      label: 'Circle',
-                      value: 'circle',
-                    },
-                    {
-                      label: 'Square',
-                      value: 'square',
-                    },
                     {
                       label: 'Triangle',
                       value: 'triangle',
                     },
+                    {
+                      label: 'Rectangle',
+                      value: 'rectangle',
+                    },
+                    {
+                      label: 'Ellipse',
+                      value: 'ellipse',
+                    },
                   ],
-                },
-                {
-                  type: 'number',
-                  name: 'size',
-                  required: true,
-                  label: 'Size',
-                  min: 0,
-                  max: 100,
-                  defaultValue: 10,
+                  defaultValue: 'rectangle',
                   admin: {
-                    description: 'The size of the leaves.',
-                    width: '33%',
-                  },
-                },
-                {
-                  type: 'number',
-                  name: 'angle',
-                  required: true,
-                  label: 'Angle',
-                  min: 0,
-                  max: 360,
-                  defaultValue: 25,
-                  admin: {
-                    description: 'The angle of the leaves.',
-                    width: '33%',
-                  },
-                },
-              ],
-            },
-            {
-              type: 'array',
-              name: 'colors',
-              label: 'Colors',
-              minRows: 1,
-              maxRows: 5,
-              fields: [
-                {
-                  type: 'text',
-                  name: 'color',
-                  label: 'Color',
-                  defaultValue: '#88ff33',
-                  required: true,
-                  admin: {
-                    description: 'The color of the leaves.',
-                    width: '100%',
+                    description: 'The shape of the leaves.',
+                    width: '34%',
                   },
                 },
               ],

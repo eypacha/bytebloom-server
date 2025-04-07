@@ -69,8 +69,9 @@ export interface Config {
   collections: {
     users: User;
     'user-plants': UserPlant;
-    plants: Plant;
     lsystems: Lsystem;
+    varieties: Variety;
+    plants: Plant;
     images: Image;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,8 +81,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     'user-plants': UserPlantsSelect<false> | UserPlantsSelect<true>;
-    plants: PlantsSelect<false> | PlantsSelect<true>;
     lsystems: LsystemsSelect<false> | LsystemsSelect<true>;
+    varieties: VarietiesSelect<false> | VarietiesSelect<true>;
+    plants: PlantsSelect<false> | PlantsSelect<true>;
     images: ImagesSelect<false> | ImagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -151,6 +153,10 @@ export interface UserPlant {
    */
   plant: string | Plant;
   /**
+   * Variety of the plant.
+   */
+  variety: string | Variety;
+  /**
    * The number of iterations to perform.
    */
   iterations: number;
@@ -158,75 +164,6 @@ export interface UserPlant {
    * The string of the L-System.
    */
   lSystemString: string;
-  params: {
-    /**
-     * The name of the variety.
-     */
-    name: string;
-    /**
-     * Preview image of the variety.
-     */
-    previewImage?: (string | null) | Image;
-    /**
-     * The number of max iterations to perform.
-     */
-    maxIterations: number;
-    branchs: {
-      /**
-       * The angle of a new branch.
-       */
-      angle: number;
-      /**
-       * The width of the branch.
-       */
-      baseWidth: number;
-      /**
-       * The fallof width of the branch.
-       */
-      widthFalloff: number;
-      /**
-       * The length of the branch.
-       */
-      baseLength: number;
-      /**
-       * The max length of a new branch.
-       */
-      maxLength: number;
-      /**
-       * The reduction of the length of a new branch.
-       */
-      lengthReduction: number;
-      colors?:
-        | {
-            /**
-             * The color of the branchs.
-             */
-            color: string;
-            id?: string | null;
-          }[]
-        | null;
-    };
-    leaves: {
-      shape: 'circle' | 'square' | 'triangle';
-      /**
-       * The size of the leaves.
-       */
-      size: number;
-      /**
-       * The angle of the leaves.
-       */
-      angle: number;
-      colors?:
-        | {
-            /**
-             * The color of the leaves.
-             */
-            color: string;
-            id?: string | null;
-          }[]
-        | null;
-    };
-  };
   updatedAt: string;
   createdAt: string;
 }
@@ -252,78 +189,72 @@ export interface Plant {
    * Preview image of the plant.
    */
   previewImage?: (string | null) | Image;
-  varieties?:
-    | {
-        /**
-         * The name of the variety.
-         */
-        name: string;
-        /**
-         * Preview image of the variety.
-         */
-        previewImage?: (string | null) | Image;
-        /**
-         * The number of max iterations to perform.
-         */
-        maxIterations: number;
-        branchs: {
-          /**
-           * The angle of a new branch.
-           */
-          angle: number;
-          /**
-           * The width of the branch.
-           */
-          baseWidth: number;
-          /**
-           * The falloff width of the branch.
-           */
-          widthFalloff: number;
-          /**
-           * The length of the branch.
-           */
-          baseLength: number;
-          /**
-           * The max length of a new branch.
-           */
-          maxLength: number;
-          /**
-           * The reduction of the length of a new branch.
-           */
-          lengthReduction: number;
-          colors?:
-            | {
-                /**
-                 * The color of the branchs.
-                 */
-                color: string;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        leaves: {
-          shape: 'circle' | 'square' | 'triangle';
-          /**
-           * The size of the leaves.
-           */
-          size: number;
-          /**
-           * The angle of the leaves.
-           */
-          angle: number;
-          colors?:
-            | {
-                /**
-                 * The color of the leaves.
-                 */
-                color: string;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Is this plant a trailing plant?
+   */
+  isTrailing?: boolean | null;
+  /**
+   * Does this plant have leaves?
+   */
+  hasLeaves?: boolean | null;
+  /**
+   * Is this plant deciduous?
+   */
+  isDeciduous?: boolean | null;
+  params: {
+    /**
+     * The number of max iterations to perform.
+     */
+    maxIterations: number;
+    branchs: {
+      /**
+       * The angle of a new branch.
+       */
+      angle: number;
+      /**
+       * The reduction of the angle of a new branch.
+       */
+      angleReduction: number;
+      /**
+       * The width of the branch.
+       */
+      baseWidth: number;
+      /**
+       * The with reduction width of the branch.
+       */
+      widthReduction: number;
+      /**
+       * The length of the branch.
+       */
+      baseLength: number;
+      /**
+       * The max length of a new branch.
+       */
+      maxLength: number;
+      /**
+       * The reduction of the length of a new branch.
+       */
+      lengthReduction: number;
+      /**
+       * The randomness of the three.
+       */
+      randomness: number;
+    };
+    leaves: {
+      /**
+       * The width of the leaves.
+       */
+      sizeX: number;
+      /**
+       * The height of the leaves.
+       */
+      sizeY: number;
+      /**
+       * The shape of the leaves.
+       */
+      shape: 'triangle' | 'rectangle' | 'ellipse';
+    };
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -393,6 +324,37 @@ export interface Image {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "varieties".
+ */
+export interface Variety {
+  id: string;
+  /**
+   * The name of the variety.
+   */
+  name: string;
+  /**
+   * The colors of the branches.
+   */
+  branchColors?:
+    | {
+        color?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The colors of the leaves.
+   */
+  leafColors?:
+    | {
+        color?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -407,12 +369,16 @@ export interface PayloadLockedDocument {
         value: string | UserPlant;
       } | null)
     | ({
-        relationTo: 'plants';
-        value: string | Plant;
-      } | null)
-    | ({
         relationTo: 'lsystems';
         value: string | Lsystem;
+      } | null)
+    | ({
+        relationTo: 'varieties';
+        value: string | Variety;
+      } | null)
+    | ({
+        relationTo: 'plants';
+        value: string | Plant;
       } | null)
     | ({
         relationTo: 'images';
@@ -482,93 +448,9 @@ export interface UsersSelect<T extends boolean = true> {
 export interface UserPlantsSelect<T extends boolean = true> {
   user?: T;
   plant?: T;
+  variety?: T;
   iterations?: T;
   lSystemString?: T;
-  params?:
-    | T
-    | {
-        name?: T;
-        previewImage?: T;
-        maxIterations?: T;
-        branchs?:
-          | T
-          | {
-              angle?: T;
-              baseWidth?: T;
-              widthFalloff?: T;
-              baseLength?: T;
-              maxLength?: T;
-              lengthReduction?: T;
-              colors?:
-                | T
-                | {
-                    color?: T;
-                    id?: T;
-                  };
-            };
-        leaves?:
-          | T
-          | {
-              shape?: T;
-              size?: T;
-              angle?: T;
-              colors?:
-                | T
-                | {
-                    color?: T;
-                    id?: T;
-                  };
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "plants_select".
- */
-export interface PlantsSelect<T extends boolean = true> {
-  name?: T;
-  description?: T;
-  lSystem?: T;
-  previewImage?: T;
-  varieties?:
-    | T
-    | {
-        name?: T;
-        previewImage?: T;
-        maxIterations?: T;
-        branchs?:
-          | T
-          | {
-              angle?: T;
-              baseWidth?: T;
-              widthFalloff?: T;
-              baseLength?: T;
-              maxLength?: T;
-              lengthReduction?: T;
-              colors?:
-                | T
-                | {
-                    color?: T;
-                    id?: T;
-                  };
-            };
-        leaves?:
-          | T
-          | {
-              shape?: T;
-              size?: T;
-              angle?: T;
-              colors?:
-                | T
-                | {
-                    color?: T;
-                    id?: T;
-                  };
-            };
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -586,6 +468,66 @@ export interface LsystemsSelect<T extends boolean = true> {
         successor?: T;
         odds?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "varieties_select".
+ */
+export interface VarietiesSelect<T extends boolean = true> {
+  name?: T;
+  branchColors?:
+    | T
+    | {
+        color?: T;
+        id?: T;
+      };
+  leafColors?:
+    | T
+    | {
+        color?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plants_select".
+ */
+export interface PlantsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  lSystem?: T;
+  previewImage?: T;
+  isTrailing?: T;
+  hasLeaves?: T;
+  isDeciduous?: T;
+  params?:
+    | T
+    | {
+        maxIterations?: T;
+        branchs?:
+          | T
+          | {
+              angle?: T;
+              angleReduction?: T;
+              baseWidth?: T;
+              widthReduction?: T;
+              baseLength?: T;
+              maxLength?: T;
+              lengthReduction?: T;
+              randomness?: T;
+            };
+        leaves?:
+          | T
+          | {
+              sizeX?: T;
+              sizeY?: T;
+              shape?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

@@ -1,11 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
+const colorPicker = '@/collections/CustomFields/ColorPicker'
+
 export const Varieties: CollectionConfig = {
   slug: 'varieties',
   admin: {
     useAsTitle: 'name',
     group: 'Main',
-    defaultColumns: ['name', 'lSystem', 'previewImage'],
+    defaultColumns: ['name'],
   },
   access: {
     read: () => {
@@ -48,7 +50,7 @@ export const Varieties: CollectionConfig = {
               defaultValue: '#441100',
               admin: {
                 components: {
-                  Field: '@/collections/CustomFields/ColorPicker',
+                  Field: colorPicker,
                 },
               },
             },
@@ -68,10 +70,10 @@ export const Varieties: CollectionConfig = {
             {
               type: 'text',
               name: 'color',
-              defaultValue: '#003d1v',
+              defaultValue: '#003d1b',
               admin: {
                 components: {
-                  Field: '@/collections/CustomFields/ColorPicker',
+                  Field: colorPicker,
                 },
               },
             },
