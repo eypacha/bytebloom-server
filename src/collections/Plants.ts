@@ -156,7 +156,7 @@ export const Plants: CollectionConfig = {
                   required: true,
                   label: 'Base width',
                   min: 0,
-                  max: 20,
+                  max: 40,
                   defaultValue: 1,
                   admin: {
                     description: 'The width of the branch.',
@@ -169,7 +169,7 @@ export const Plants: CollectionConfig = {
                   required: true,
                   label: 'Width Reduction',
                   min: 0,
-                  max: 100,
+                  max: 1,
                   defaultValue: 0,
                   admin: {
                     description: 'The with reduction width of the branch.',
