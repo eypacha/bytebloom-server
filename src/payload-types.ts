@@ -273,7 +273,7 @@ export interface Lsystem {
    */
   axiom: string;
   /**
-   * The production rules of the L-System.
+   * The production rules of the L-System. S (Seed), F (Branch), L (Leaf), T (Spine),+ (Turn Right), - (Turn Left), [ (Push State), ] (Pop State).
    */
   rules: {
     /**
