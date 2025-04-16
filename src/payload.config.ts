@@ -15,14 +15,15 @@ import { Varieties } from './collections/Varieties'
 import { UserPlants } from './collections/UserPlants'
 
 import { Images } from './collections/Images'
+import { Audio } from './collections/Audio'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const isProduction = process.env.NODE_ENV === 'production'
+// const isProduction = process.env.NODE_ENV === 'production'
 
 export default buildConfig({
-  cors: isProduction ? [] : '*',
+  cors: '*',
   admin: {
     user: Users.slug,
     importMap: {
@@ -47,7 +48,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, UserPlants, LSystems, Varieties, Plants, Images],
+  collections: [Users, UserPlants, LSystems, Varieties, Plants, Images, Audio],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
