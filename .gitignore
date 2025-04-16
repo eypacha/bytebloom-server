@@ -40,7 +40,11 @@ next-env.d.ts
 
 .env
 
+# Files created upload in Payload
 /media
 /images/*
+/audio/*
+
+# other import
 .qodo
 
