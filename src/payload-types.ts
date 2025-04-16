@@ -73,6 +73,7 @@ export interface Config {
     varieties: Variety;
     plants: Plant;
     images: Image;
+    audio: Audio;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -85,6 +86,7 @@ export interface Config {
     varieties: VarietiesSelect<false> | VarietiesSelect<true>;
     plants: PlantsSelect<false> | PlantsSelect<true>;
     images: ImagesSelect<false> | ImagesSelect<true>;
+    audio: AudioSelect<false> | AudioSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -164,6 +166,14 @@ export interface UserPlant {
    * The string of the L-System.
    */
   lSystemString: string;
+  /**
+   * The wet level of the plant.
+   */
+  wetLevel: number;
+  /**
+   * The date the plant was last watered.
+   */
+  lastWatered?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -355,6 +365,24 @@ export interface Variety {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audio".
+ */
+export interface Audio {
+  id: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -383,6 +411,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'images';
         value: string | Image;
+      } | null)
+    | ({
+        relationTo: 'audio';
+        value: string | Audio;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -451,6 +483,8 @@ export interface UserPlantsSelect<T extends boolean = true> {
   variety?: T;
   iterations?: T;
   lSystemString?: T;
+  wetLevel?: T;
+  lastWatered?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -563,6 +597,23 @@ export interface ImagesSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audio_select".
+ */
+export interface AudioSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
