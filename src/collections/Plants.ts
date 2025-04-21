@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+const colorPicker = '@/collections/CustomFields/ColorPicker'
 
 export const Plants: CollectionConfig = {
   slug: 'plants',
@@ -90,9 +91,33 @@ export const Plants: CollectionConfig = {
           admin: {
             description: 'Is this plant deciduous?',
             width: '25%',
+            condition: (data, siblingData) => {
+              return siblingData?.hasLeaves
+            },
+          },
+        },
+        {
+          type: 'checkbox',
+          name: 'hasFruits',
+          label: 'Has fruits',
+          defaultValue: false,
+          admin: {
+            description: 'Does this plant have fruits?',
+            width: '25%',
           },
         },
       ],
+    },
+    {
+      name: 'varieties',
+      type: 'relationship',
+      relationTo: 'varieties',
+      required: true,
+      hasMany: true,
+      admin: {
+        description: 'Varieties of this plant',
+        width: '33%',
+      },
     },
     {
       type: 'group',
@@ -104,14 +129,14 @@ export const Plants: CollectionConfig = {
           fields: [
             {
               type: 'number',
-              name: 'maxIterations',
+              name: 'iterations',
               required: true,
-              label: 'Max Iterations',
+              label: 'Iterations',
               min: 1,
               max: 15,
               defaultValue: 7,
               admin: {
-                description: 'The number of max iterations to perform.',
+                description: 'The number of iterations to perform.',
               },
             },
           ],
@@ -119,7 +144,7 @@ export const Plants: CollectionConfig = {
         {
           type: 'group',
           name: 'branchs',
-          label: 'Branchs',
+          label: 'Branches',
           fields: [
             {
               type: 'row',
@@ -241,10 +266,39 @@ export const Plants: CollectionConfig = {
           type: 'group',
           name: 'leaves',
           label: 'Leaves',
+          admin: {
+            condition: (data) => {
+              return data.hasLeaves
+            },
+          },
           fields: [
             {
               type: 'row',
               fields: [
+                {
+                  type: 'number',
+                  name: 'afterIteration',
+                  required: true,
+                  min: 1,
+                  max: 20,
+                  defaultValue: 6,
+                  admin: {
+                    description: 'The iteration after which the leaves are created.',
+                    width: '20%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'density',
+                  required: true,
+                  min: 0,
+                  max: 1,
+                  defaultValue: 1,
+                  admin: {
+                    description: 'The density of the leaves.',
+                    width: '20%',
+                  },
+                },
                 {
                   type: 'number',
                   name: 'sizeX',
@@ -254,7 +308,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 4,
                   admin: {
                     description: 'The width of the leaves.',
-                    width: '33%',
+                    width: '20%',
                   },
                 },
                 {
@@ -266,7 +320,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 4,
                   admin: {
                     description: 'The height of the leaves.',
-                    width: '33%',
+                    width: '20%',
                   },
                 },
                 {
@@ -290,7 +344,72 @@ export const Plants: CollectionConfig = {
                   defaultValue: 'rectangle',
                   admin: {
                     description: 'The shape of the leaves.',
-                    width: '34%',
+                    width: '20%',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'group',
+          name: 'fruits',
+          label: 'Fruits',
+          admin: {
+            condition: (data) => {
+              return data.hasFruits
+            },
+          },
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  type: 'number',
+                  name: 'density',
+                  required: true,
+                  min: 0,
+                  max: 1,
+                  defaultValue: 0.5,
+                  admin: {
+                    description: 'The density of the fruits.',
+                    width: '25%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'sizeX',
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  defaultValue: 4,
+                  admin: {
+                    description: 'The width of the fruits.',
+                    width: '25%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'sizeY',
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  defaultValue: 4,
+                  admin: {
+                    description: 'The height of the fruits.',
+                    width: '25%',
+                  },
+                },
+                {
+                  type: 'text',
+                  name: 'color',
+                  defaultValue: '#441100',
+                  admin: {
+                    components: {
+                      Field: colorPicker,
+                    },
+                    description: 'The color of the fruits.',
+                    width: '25%',
                   },
                 },
               ],

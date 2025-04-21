@@ -68,7 +68,6 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    'user-plants': UserPlant;
     lsystems: Lsystem;
     varieties: Variety;
     plants: Plant;
@@ -81,7 +80,6 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    'user-plants': UserPlantsSelect<false> | UserPlantsSelect<true>;
     lsystems: LsystemsSelect<false> | LsystemsSelect<true>;
     varieties: VarietiesSelect<false> | VarietiesSelect<true>;
     plants: PlantsSelect<false> | PlantsSelect<true>;
@@ -142,38 +140,67 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "user-plants".
+ * via the `definition` "lsystems".
  */
-export interface UserPlant {
+export interface Lsystem {
   id: string;
   /**
-   * User who owns the plant.
+   * The name of the L-System.
    */
-  user: string | User;
+  name: string;
   /**
-   * Plant associated with the user.
+   * The initial string of the L-System.
    */
-  plant: string | Plant;
+  axiom: string;
   /**
-   * Variety of the plant.
+   * The production rules of the L-System. S (Seed), F (Branch), L (Leaf), T (Spine),+ (Turn Right), - (Turn Left), [ (Push State), ] (Pop State).
    */
-  variety: string | Variety;
+  rules: {
+    /**
+     * The predecessor string.
+     */
+    predecessor: string;
+    /**
+     * The successor string.
+     */
+    successor?: string | null;
+    /**
+     * The odds of this rule being applied.
+     */
+    odds: number;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "varieties".
+ */
+export interface Variety {
+  id: string;
   /**
-   * The number of iterations to perform.
+   * The name of the variety.
    */
-  iterations: number;
+  name: string;
   /**
-   * The string of the L-System.
+   * The colors of the branches.
    */
-  lSystemString: string;
+  branchColors?:
+    | {
+        color?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   /**
-   * The wet level of the plant.
+   * The colors of the leaves.
    */
-  wetLevel: number;
-  /**
-   * The date the plant was last watered.
-   */
-  lastWatered?: string | null;
+  leafColors?:
+    | {
+        color?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -211,11 +238,19 @@ export interface Plant {
    * Is this plant deciduous?
    */
   isDeciduous?: boolean | null;
+  /**
+   * Does this plant have fruits?
+   */
+  hasFruits?: boolean | null;
+  /**
+   * Varieties of this plant
+   */
+  varieties: (string | Variety)[];
   params: {
     /**
-     * The number of max iterations to perform.
+     * The number of iterations to perform.
      */
-    maxIterations: number;
+    iterations: number;
     branchs: {
       /**
        * The angle of a new branch.
@@ -250,7 +285,15 @@ export interface Plant {
        */
       randomness: number;
     };
-    leaves: {
+    leaves?: {
+      /**
+       * The iteration after which the leaves are created.
+       */
+      afterIteration: number;
+      /**
+       * The density of the leaves.
+       */
+      density: number;
       /**
        * The width of the leaves.
        */
@@ -264,42 +307,25 @@ export interface Plant {
        */
       shape: 'triangle' | 'rectangle' | 'ellipse';
     };
+    fruits?: {
+      /**
+       * The density of the fruits.
+       */
+      density: number;
+      /**
+       * The width of the fruits.
+       */
+      sizeX: number;
+      /**
+       * The height of the fruits.
+       */
+      sizeY: number;
+      /**
+       * The color of the fruits.
+       */
+      color?: string | null;
+    };
   };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "lsystems".
- */
-export interface Lsystem {
-  id: string;
-  /**
-   * The name of the L-System.
-   */
-  name: string;
-  /**
-   * The initial string of the L-System.
-   */
-  axiom: string;
-  /**
-   * The production rules of the L-System. S (Seed), F (Branch), L (Leaf), T (Spine),+ (Turn Right), - (Turn Left), [ (Push State), ] (Pop State).
-   */
-  rules: {
-    /**
-     * The predecessor string.
-     */
-    predecessor: string;
-    /**
-     * The successor string.
-     */
-    successor?: string | null;
-    /**
-     * The odds of this rule being applied.
-     */
-    odds: number;
-    id?: string | null;
-  }[];
   updatedAt: string;
   createdAt: string;
 }
@@ -334,37 +360,6 @@ export interface Image {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "varieties".
- */
-export interface Variety {
-  id: string;
-  /**
-   * The name of the variety.
-   */
-  name: string;
-  /**
-   * The colors of the branches.
-   */
-  branchColors?:
-    | {
-        color?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * The colors of the leaves.
-   */
-  leafColors?:
-    | {
-        color?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "audio".
  */
 export interface Audio {
@@ -391,10 +386,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
-      } | null)
-    | ({
-        relationTo: 'user-plants';
-        value: string | UserPlant;
       } | null)
     | ({
         relationTo: 'lsystems';
@@ -475,21 +466,6 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "user-plants_select".
- */
-export interface UserPlantsSelect<T extends boolean = true> {
-  user?: T;
-  plant?: T;
-  variety?: T;
-  iterations?: T;
-  lSystemString?: T;
-  wetLevel?: T;
-  lastWatered?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "lsystems_select".
  */
 export interface LsystemsSelect<T extends boolean = true> {
@@ -539,10 +515,12 @@ export interface PlantsSelect<T extends boolean = true> {
   isTrailing?: T;
   hasLeaves?: T;
   isDeciduous?: T;
+  hasFruits?: T;
+  varieties?: T;
   params?:
     | T
     | {
-        maxIterations?: T;
+        iterations?: T;
         branchs?:
           | T
           | {
@@ -558,9 +536,19 @@ export interface PlantsSelect<T extends boolean = true> {
         leaves?:
           | T
           | {
+              afterIteration?: T;
+              density?: T;
               sizeX?: T;
               sizeY?: T;
               shape?: T;
+            };
+        fruits?:
+          | T
+          | {
+              density?: T;
+              sizeX?: T;
+              sizeY?: T;
+              color?: T;
             };
       };
   updatedAt?: T;

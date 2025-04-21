@@ -12,7 +12,6 @@ import { Users } from './collections/Users'
 import { LSystems } from './collections/LSystems'
 import { Plants } from './collections/Plants'
 import { Varieties } from './collections/Varieties'
-import { UserPlants } from './collections/UserPlants'
 
 import { Images } from './collections/Images'
 import { Audio } from './collections/Audio'
@@ -48,7 +47,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, UserPlants, LSystems, Varieties, Plants, Images, Audio],
+  collections: [Users, LSystems, Varieties, Plants, Images, Audio],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
