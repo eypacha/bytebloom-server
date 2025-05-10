@@ -143,7 +143,7 @@ export const Plants: CollectionConfig = {
         },
         {
           type: 'group',
-          name: 'branchs',
+          name: 'branches',
           label: 'Branches',
           fields: [
             {
@@ -208,28 +208,15 @@ export const Plants: CollectionConfig = {
               fields: [
                 {
                   type: 'number',
-                  name: 'baseLength',
+                  name: 'length',
                   required: true,
-                  label: 'Base Length',
+                  label: 'Length',
                   min: 0,
                   max: 100,
                   defaultValue: 10,
                   admin: {
                     description: 'The length of the branch.',
-                    width: '25%',
-                  },
-                },
-                {
-                  type: 'number',
-                  name: 'maxLength',
-                  required: true,
-                  label: 'Max Length',
-                  min: 0,
-                  max: 100,
-                  defaultValue: 10,
-                  admin: {
-                    description: 'The max length of a new branch.',
-                    width: '25%',
+                    width: '20%',
                   },
                 },
                 {
@@ -242,7 +229,33 @@ export const Plants: CollectionConfig = {
                   defaultValue: 0.9,
                   admin: {
                     description: 'The reduction of the length of a new branch.',
-                    width: '25%',
+                    width: '20%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'iterationReduction',
+                  required: true,
+                  label: 'Iteration reduction',
+                  min: 0,
+                  max: 1,
+                  defaultValue: 1,
+                  admin: {
+                    description: 'The reduction after each iteration.',
+                    width: '20%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'growthRate',
+                  required: true,
+                  label: 'Growth rate',
+                  min: 0,
+                  max: 2,
+                  defaultValue: 0.5,
+                  admin: {
+                    description: 'Growth rate of the branches after each watering.',
+                    width: '20%',
                   },
                 },
                 {
@@ -255,7 +268,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 0.5,
                   admin: {
                     description: 'The randomness of the three.',
-                    width: '25%',
+                    width: '20%',
                   },
                 },
               ],
@@ -275,54 +288,6 @@ export const Plants: CollectionConfig = {
             {
               type: 'row',
               fields: [
-                {
-                  type: 'number',
-                  name: 'afterIteration',
-                  required: true,
-                  min: 1,
-                  max: 20,
-                  defaultValue: 6,
-                  admin: {
-                    description: 'The iteration after which the leaves are created.',
-                    width: '20%',
-                  },
-                },
-                {
-                  type: 'number',
-                  name: 'density',
-                  required: true,
-                  min: 0,
-                  max: 1,
-                  defaultValue: 1,
-                  admin: {
-                    description: 'The density of the leaves.',
-                    width: '20%',
-                  },
-                },
-                {
-                  type: 'number',
-                  name: 'sizeX',
-                  required: true,
-                  min: 1,
-                  max: 10,
-                  defaultValue: 4,
-                  admin: {
-                    description: 'The width of the leaves.',
-                    width: '20%',
-                  },
-                },
-                {
-                  type: 'number',
-                  name: 'sizeY',
-                  required: true,
-                  min: 1,
-                  max: 10,
-                  defaultValue: 4,
-                  admin: {
-                    description: 'The height of the leaves.',
-                    width: '20%',
-                  },
-                },
                 {
                   type: 'select',
                   name: 'shape',
@@ -344,7 +309,43 @@ export const Plants: CollectionConfig = {
                   defaultValue: 'rectangle',
                   admin: {
                     description: 'The shape of the leaves.',
-                    width: '20%',
+                    width: '25%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'sizeX',
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  defaultValue: 4,
+                  admin: {
+                    description: 'The width of the leaves.',
+                    width: '25%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'sizeY',
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  defaultValue: 4,
+                  admin: {
+                    description: 'The height of the leaves.',
+                    width: '25%',
+                  },
+                },
+                {
+                  type: 'number',
+                  name: 'afterIteration',
+                  required: true,
+                  min: 1,
+                  max: 20,
+                  defaultValue: 6,
+                  admin: {
+                    description: 'The iteration after which the leaves are created.',
+                    width: '25%',
                   },
                 },
               ],
@@ -366,6 +367,18 @@ export const Plants: CollectionConfig = {
               fields: [
                 {
                   type: 'number',
+                  name: 'afterIteration',
+                  required: true,
+                  min: 1,
+                  max: 15,
+                  defaultValue: 5,
+                  admin: {
+                    description: 'The iteration after which the fruits are created.',
+                    width: '20%',
+                  },
+                },
+                {
+                  type: 'number',
                   name: 'density',
                   required: true,
                   min: 0,
@@ -373,7 +386,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 0.5,
                   admin: {
                     description: 'The density of the fruits.',
-                    width: '25%',
+                    width: '20%',
                   },
                 },
                 {
@@ -385,7 +398,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 4,
                   admin: {
                     description: 'The width of the fruits.',
-                    width: '25%',
+                    width: '20%',
                   },
                 },
                 {
@@ -397,7 +410,7 @@ export const Plants: CollectionConfig = {
                   defaultValue: 4,
                   admin: {
                     description: 'The height of the fruits.',
-                    width: '25%',
+                    width: '20%',
                   },
                 },
                 {
@@ -409,7 +422,7 @@ export const Plants: CollectionConfig = {
                       Field: colorPicker,
                     },
                     description: 'The color of the fruits.',
-                    width: '25%',
+                    width: '20%',
                   },
                 },
               ],
